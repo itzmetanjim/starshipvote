@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "StarshipVote",
+  "version": "1.0",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "description": "A chrome extension for Stardance that allows you to view the demo and repo of a project in a sidebar",
+  "content_scripts": [
+    {
+      "matches": ["https://stardance.hackclub.com/rate/*","https://stardance.space/rate/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
+
