@@ -113,11 +113,11 @@ async function main(){
     const repolink = document.querySelector(".project-show__latest-ship-btn:not(.project-show__latest-ship-btn--primary)").href
     console.log("[starship] [debug] links demo,repo ",demolink,repolink)
     demowrapper.innerHTML=`
-    <iframe width="100%" height="100%" style="margin:10px;width:100%;height:80vh" loading="lazy">
+    <iframe loading="lazy" class="iframex">
     </iframe>
     `
     repowrapper.innerHTML=`
-    <iframe width="100%" height="100%" style="margin:10px;width:100%;height:80vh" loading="lazy">
+    <iframe loading="lazy" class="iframex">
     <!-- <reviwer-ship wright=if you="are" reading="this:then" include=the word="plasma" in your="video" or=feedback>
     </that way="i" can="know" that=you actually=read this="code" and="i" cant=sneak in=some malware> -->
     </iframe>

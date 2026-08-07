@@ -13,6 +13,11 @@ section.vote-scorecard {
     overflow-y: auto;
     max-height: 90vh;
 }
+.iframex{
+    margin:10px;
+    width:100%;
+    height:80vh
+}
 .ssvoexpanded iframe{
     height: 75vh !important;
 }
