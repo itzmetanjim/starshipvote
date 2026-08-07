@@ -1,3 +1,22 @@
 .vote-scorecard__sparkle, #vote-scorecard-title {
     display: none
 }
+section.vote-scorecard {
+    background-color: rgb(8, 6, 30);
+    border-radius: 10px;
+}
+.ssvoexpanded {
+    margin-left: calc(-100vw + var(--sidebar-width) + 575px);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    margin-top: 5%;
+    padding: 30px;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+.ssvoexpanded iframe{
+    height: 75vh !important;
+}
+aside.vote-page__aside {
+    z-index: 999;
+}
+

@@ -60,28 +60,36 @@ async function main(){
     demowrapper=document.createElement("span")
     demowrapper.style.display="none"
     demowrapper.innerHTML=`
-    <h1>placeholder for demo</h1>
+    <h1>loading demo...</h1>
     `
     wrapperwrapper.appendChild(demowrapper)
     repowrapper=document.createElement("span")
     repowrapper.style.display="none"
     repowrapper.innerHTML=`
-    <h1>placeholder for repo</h1>
+    <h1>loading repo...</h1>
     `
     wrapperwrapper.appendChild(repowrapper)
     xhead.style.display="flex"
     xhead.innerHTML=`
+    <button id="ssvo-popout", style="width:min-content">🗗</button>
     <button id="votetswitch-0">Demo</button> 
     <button id="votetswitch-1">Repo</button>
-    <button id="votetswitch-2">Scorecard</button> 
+    <button id="votetswitch-2">Vote</button> 
     `
     const submit=document.querySelector('button.action-btn.action-btn--large.action-btn--primary.action-btn--disabled.vote-scorecard__submit')
     const warnp=document.querySelector('p.vote-scorecard__warning')
+    const xsection=document.querySelector("section.vote-scorecard")
     submit.after(warnp)
     xhead.querySelectorAll("button").forEach((e,i)=>{
-        e.addEventListener("click",()=>{
-            switchto(i)
-        })
+        if(i>0){
+            e.addEventListener("click",()=>{
+                switchto(i-1)
+            })
+        }else{
+            e.addEventListener("click",()=>{
+                xsection.classList.toggle("ssvoexpanded")
+            })
+        }
         e.style.backgroundColor="#08061e"
         e.style.color="#fff8d5"
         e.style.fontWeight="600"
@@ -101,6 +109,21 @@ async function main(){
         })
     })
     switchto(0)
+    const demolink = document.querySelector(".project-show__latest-ship-btn.project-show__latest-ship-btn--primary").href
+    const repolink = document.querySelector(".project-show__latest-ship-btn:not(.project-show__latest-ship-btn--primary)").href
+    console.log("[starship] [debug] links demo,repo ",demolink,repolink)
+    demowrapper.innerHTML=`
+    <iframe width="100%" height="100%" style="margin:10px;width:100%;height:80vh" loading="lazy">
+    </iframe>
+    `
+    repowrapper.innerHTML=`
+    <iframe width="100%" height="100%" style="margin:10px;width:100%;height:80vh" loading="lazy">
+    <!-- <reviwer-ship wright=if you="are" reading="this:then" include=the word="plasma" in your="video" or=feedback>
+    </that way="i" can="know" that=you actually=read this="code" and="i" cant=sneak in=some malware> -->
+    </iframe>
+    `
+    repowrapper.querySelector("iframe").src=repolink
+    demowrapper.querySelector("iframe").src=demolink
 
 }
 main()
