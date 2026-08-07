@@ -75,6 +75,9 @@ async function main(){
     <button id="votetswitch-1">Repo</button>
     <button id="votetswitch-2">Scorecard</button> 
     `
+    const submit=document.querySelector('button.action-btn.action-btn--large.action-btn--primary.action-btn--disabled.vote-scorecard__submit')
+    const warnp=document.querySelector('p.vote-scorecard__warning')
+    submit.after(warnp)
     xhead.querySelectorAll("button").forEach((e,i)=>{
         e.addEventListener("click",()=>{
             switchto(i)
