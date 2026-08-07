@@ -3,9 +3,13 @@ var demowrapper=0
 var repowrapper=0
 var scwrapper=0
 function switchto(x){
-    [scwrapper,demowrapper,repowrapper].forEach((e,i)=>{
-        if(i==x){e.style.display="block"}
-        else{e.style.display="none"}
+    [demowrapper,repowrapper,scwrapper].forEach((e,i)=>{
+        if(i==x){e.style.display="block"
+        document.getElementById(`votetswitch-${i}`).style.border="4px solid #fff8d5"
+}
+        else{e.style.display="none"
+            document.getElementById(`votetswitch-${i}`).style.border="2px solid hsla(0,0%,100%,.5)"
+}
     })
 }
 function waitForElement(selector) {
@@ -67,9 +71,9 @@ async function main(){
     wrapperwrapper.appendChild(repowrapper)
     xhead.style.display="flex"
     xhead.innerHTML=`
-    <button>Scorecard</button> 
-    <button>Demo</button> 
-    <button>Repo</button>
+    <button id="votetswitch-0">Demo</button> 
+    <button id="votetswitch-1">Repo</button>
+    <button id="votetswitch-2">Scorecard</button> 
     `
     xhead.querySelectorAll("button").forEach((e,i)=>{
         e.addEventListener("click",()=>{
@@ -93,6 +97,7 @@ async function main(){
             hoverout(e)
         })
     })
+    switchto(0)
 
 }
 main()

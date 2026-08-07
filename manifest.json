@@ -12,6 +12,7 @@
     {
       "matches": ["https://stardance.hackclub.com/rate/*","https://stardance.space/rate/*"],
       "js": ["content.js"],
+      "css": ["styles.css"],
       "run_at": "document_idle"
     }
   ]
