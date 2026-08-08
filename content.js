@@ -111,8 +111,8 @@ async function main(){
     </that way="i" can="know" that=you actually=read this="code" and="i" cant=sneak in=some malware>
     --></iframe>
     `
-    repowrapper.querySelector("iframe").src=repolink
-    demowrapper.querySelector("iframe").src=demolink
+    repowrapper.querySelector("iframe").src=repolink.replace("https://github.com/","https://pages.tanjim.org/github.com/#/")
+    demowrapper.querySelector("iframe").src=demolink.replace("https://github.com/","https://pages.tanjim.org/github.com/#/")
 
 }
 if (window.location.href.includes("/rate/new")){
