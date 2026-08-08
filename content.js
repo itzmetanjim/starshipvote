@@ -71,10 +71,10 @@ async function main(){
     wrapperwrapper.appendChild(repowrapper)
     xhead.style.display="flex"
     xhead.innerHTML=`
-    <button id="ssvo-popout", style="width:min-content">🗗</button>
-    <button id="votetswitch-0">Demo</button> 
-    <button id="votetswitch-1">Repo</button>
-    <button id="votetswitch-2">Vote</button> 
+    <button id="ssvo-popout", style="width:min-content" class="buttonx">🗗</button>
+    <button id="votetswitch-0" class="buttonx">Demo</button>
+    <button id="votetswitch-1" class="buttonx">Repo</button>
+    <button id="votetswitch-2" class="buttonx">Vote</button>
     `
     const submit=document.querySelector('button.action-btn.action-btn--large.action-btn--primary.action-btn--disabled.vote-scorecard__submit')
     const warnp=document.querySelector('p.vote-scorecard__warning')
@@ -90,17 +90,6 @@ async function main(){
                 xsection.classList.toggle("ssvoexpanded")
             })
         }
-        e.style.backgroundColor="#08061e"
-        e.style.color="#fff8d5"
-        e.style.fontWeight="600"
-        e.style.border="2px solid hsla(0,0%,100%,.5)"
-        e.style.borderRadius="999px"
-        e.style.padding="15px"
-        e.style.fontSize="30px"
-        e.style.transition="background 150ms ease,border-color 150ms ease,color 150ms ease"
-        e.style.margin="auto"
-        e.style.height="100%"
-        e.style.width="auto"
         e.addEventListener("mouseenter",()=>{
             hoverin(e)
         })
@@ -117,16 +106,18 @@ async function main(){
     </iframe>
     `
     repowrapper.innerHTML=`
-    <iframe loading="lazy" class="iframex">
-    <!-- <reviwer-ship wright=if you="are" reading="this:then" include=the word="plasma" in your="video" or=feedback>
-    </that way="i" can="know" that=you actually=read this="code" and="i" cant=sneak in=some malware> -->
-    </iframe>
+    <iframe loading="lazy" class="iframex"><!--
+    <reviwer-ship wright=if you="are" reading="this:then" include=the word="plasma" in your="video" or=feedback>
+    </that way="i" can="know" that=you actually=read this="code" and="i" cant=sneak in=some malware>
+    --></iframe>
     `
     repowrapper.querySelector("iframe").src=repolink
     demowrapper.querySelector("iframe").src=demolink
 
 }
-main()
+if (window.location.href.includes("/rate/new")){
+    main()
+}
 let lasturl=window.location.href
 new MutationObserver(()=>{
     const currenturl=window.location.href

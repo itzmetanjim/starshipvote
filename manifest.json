@@ -10,7 +10,7 @@
   "description": "A chrome extension for Stardance that allows you to view the demo and repo of a project in a sidebar",
   "content_scripts": [
     {
-      "matches": ["https://stardance.hackclub.com/rate/*","https://stardance.space/rate/*"],
+      "matches": ["https://stardance.hackclub.com/*","https://stardance.space/*"],
       "js": ["content.js"],
       "css": ["styles.css"],
       "run_at": "document_idle"

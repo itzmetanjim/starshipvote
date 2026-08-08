@@ -24,4 +24,17 @@ section.vote-scorecard {
 aside.vote-page__aside {
     z-index: 999;
 }
+.buttonx.buttonx.buttonx.buttonx{
+    background-color: #08061e;
+    color: #fff8d5;
+    font-weight: 600;
+    border: 2px solid hsla(0,0%,100%,.5);
+    border-radius: 999px;
+    padding: 15px;
+    font-size: 30px;
+    transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+    margin: auto;
+    height: 100%;
+    width: auto
+}
 
