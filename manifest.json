@@ -8,6 +8,10 @@
     "128": "icon.png"
   },
   "description": "A chrome extension for Stardance that allows you to view the demo and repo of a project in a sidebar",
+  "host_permissions": ["https://stardance.hackclub.com/*","https://stardance.space/*", "https://github.com/*"],
+  "background": {
+      "service_worker" : "background.js"
+  },
   "content_scripts": [
     {
       "matches": ["https://stardance.hackclub.com/*","https://stardance.space/*"],

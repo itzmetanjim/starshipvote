@@ -16,7 +16,12 @@ section.vote-scorecard {
 .iframex{
     margin:10px;
     width:100%;
-    height:80vh
+    height:80vh;
+    background-color: #ffffff;
+}
+section.vote-scorecard:not(.ssvoexpanded){
+    margin-left: -40px;
+    margin-right: -40px;
 }
 .ssvoexpanded iframe{
     height: 75vh !important;

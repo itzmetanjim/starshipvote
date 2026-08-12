@@ -12,6 +12,10 @@ function switchto(x){
 }
     })
 }
+async function redirect(url) {
+    return await chrome.runtime.sendMessage({action: "redirect",url: url});
+}
+
 function waitForElement(selector) {
     return new Promise((resolve)=>{
         const element=document.querySelector(selector)
@@ -111,9 +115,10 @@ async function main(){
     </that way="i" can="know" that=you actually=read this="code" and="i" cant=sneak in=some malware>
     --></iframe>
     `
-    repowrapper.querySelector("iframe").src=repolink.replace("https://github.com/","https://pages.tanjim.org/github.com/#/")
-    demowrapper.querySelector("iframe").src=demolink.replace("https://github.com/","https://pages.tanjim.org/github.com/#/")
-
+    repowrapper.querySelector("iframe").src=(await redirect(repolink)).replace("https://github.com/","https://pages.tanjim.org/github.com/#/")
+    demowrapper.querySelector("iframe").src=(await redirect(demolink)).replace("https://github.com/","https://pages.tanjim.org/github.com/#/")
+    await fetch(repolink,{mode:"no-cors"})
+    await fetch(demolink,{mode:"no-cors"})
 }
 if (window.location.href.includes("/rate/new")){
     main()
