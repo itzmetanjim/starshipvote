@@ -120,7 +120,8 @@ async function main(){
     await fetch(repolink,{mode:"no-cors"})
     await fetch(demolink,{mode:"no-cors"})
 }
-function hateOnAI(){
+async function hateOnAI(){
+    observer.disconnect();
     document.querySelectorAll("span.ssvohighlight").forEach((e,_i)=>{
         e.classList.toggle("ssvohighlight")
     })
@@ -146,27 +147,36 @@ function hateOnAI(){
             par.removeChild(node)
         }
     }
-        var notespan=document.querySelector("div.ssvoainote")
+    var notespan=0;
+
+    await navigator.locks.request('notspan_mutex', async () => {
+        notespan=document.querySelector("div.ssvoainote")
         if(!notespan){
             notespan=document.createElement("div")
-            notespan.className="ssvoainote"
-            document.querySelector("img.sidebar__logo-img").after(notespan)
+            notespan.className="ssvoainote";
+            (await waitForElement("img.sidebar__logo-img")).after(notespan)
         }
+    });
     notespan.innerHTML=havemodified?'note: chars common in ai text are being <span class="ssvohighlight ssvowtext">highlighted</span>.<span class="ssvoless"> hover for more info</span><span class="ssvomore"><br>the chars are: em dash, en dash, and curly/smart quote marks (different from normal straight quotes). these are not in a normal keyboard. curly quotes might be legitimate as macOS sometimes converts straight quotes to curly quotes.</span>':''
 }
 if (window.location.href.includes("/rate/new")){
     main()
 }
 let lasturl=window.location.href
-new MutationObserver(()=>{
+var observer=new MutationObserver(async ()=>{
+    observer.disconnect();
     const currenturl=window.location.href
     if(lasturl!=currenturl){
         lasturl=currenturl
         if (currenturl.includes("/rate/new")){
             console.log("[starship] calling main")
             main()
-            hateOnAI()
         }
     }
-}).observe(document,{attributes: true,characterData:true,subtree:true,childList:true})
+    await hateOnAI()
+    console.log("[starship] observed!")
+    observer.observe(document,{attributes: true,characterData:true,subtree:true,childList:true})
+})
+observer.observe(document,{attributes: true,characterData:true,subtree:true,childList:true})
 hateOnAI()
+console.log({"a":hateOnAI})
