@@ -19,6 +19,22 @@ section.vote-scorecard {
     height:80vh;
     background-color: #ffffff;
 }
+.ssvohighlight{
+    background-color: rgb(213 211 253 / 47%);;
+    text-decoration: underline;
+}
+.ssvoainote {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.72rem;
+    line-height: 1.3;
+    margin: 0.22rem 0px 0px;
+}
+.ssvoainote:not(:hover) .ssvomore{
+    display: none;
+}
+.ssvoainote:hover .ssvoless{
+    display: none;
+}
 section.vote-scorecard:not(.ssvoexpanded){
     margin-left: -40px;
     margin-right: -40px;

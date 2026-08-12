@@ -5,11 +5,11 @@ var scwrapper=0
 function switchto(x){
     [demowrapper,repowrapper,scwrapper].forEach((e,i)=>{
         if(i==x){e.style.display="block"
-        document.getElementById(`votetswitch-${i}`).style.border="4px solid #fff8d5"
-}
+            document.getElementById(`votetswitch-${i}`).style.border="4px solid #fff8d5"
+        }
         else{e.style.display="none"
             document.getElementById(`votetswitch-${i}`).style.border="2px solid hsla(0,0%,100%,.5)"
-}
+        }
     })
 }
 async function redirect(url) {
@@ -120,6 +120,40 @@ async function main(){
     await fetch(repolink,{mode:"no-cors"})
     await fetch(demolink,{mode:"no-cors"})
 }
+function hateOnAI(){
+    document.querySelectorAll("span.ssvohighlight").forEach((e,_i)=>{
+        e.classList.toggle("ssvohighlight")
+    })
+    const regex=new RegExp("–|—|“|”|‘|’", "giu") //matches ai em dash en dash and curly quotes not on keyboard
+    const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT)
+    const textNodes=[ ]
+    let currNode;
+    while(currNode=walker.nextNode()){
+        textNodes.push(currNode)
+    }
+    var havemodified=false
+    for(let i=textNodes.length-1;i>=0;i--){ //holy cursed for loop
+        const node=textNodes[i]
+        const par=node.parentNode
+        if(["STYLE","SCRIPT","MARK"].includes(par.tagName)){continue}
+        if(regex.test(node.nodeValue)){
+            regex.lastIndex=0
+            const tdi=document.createElement("div")
+            tdi.innerHTML=node.nodeValue.replace(regex,match=>{havemodified=true;return `<span class="ssvohighlight">${match}</span>`})
+            while(tdi.firstChild){
+                par.insertBefore(tdi.firstChild,node)
+            }
+            par.removeChild(node)
+        }
+    }
+        var notespan=document.querySelector("div.ssvoainote")
+        if(!notespan){
+            notespan=document.createElement("div")
+            notespan.className="ssvoainote"
+            document.querySelector("img.sidebar__logo-img").after(notespan)
+        }
+    notespan.innerHTML=havemodified?'note: chars common in ai text are being <span class="ssvohighlight ssvowtext">highlighted</span>.<span class="ssvoless"> hover for more info</span><span class="ssvomore"><br>the chars are: em dash, en dash, and curly/smart quote marks (different from normal straight quotes). these are not in a normal keyboard. curly quotes might be legitimate as macOS sometimes converts straight quotes to curly quotes.</span>':''
+}
 if (window.location.href.includes("/rate/new")){
     main()
 }
@@ -131,7 +165,8 @@ new MutationObserver(()=>{
         if (currenturl.includes("/rate/new")){
             console.log("[starship] calling main")
             main()
+            hateOnAI()
         }
     }
 }).observe(document,{attributes: true,characterData:true,subtree:true,childList:true})
-
+hateOnAI()
