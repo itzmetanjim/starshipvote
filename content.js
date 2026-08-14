@@ -15,7 +15,16 @@ function switchto(x){
 async function redirect(url) {
     return await chrome.runtime.sendMessage({action: "redirect",url: url});
 }
+async function findTotalHackatime(){
+    return [...document.querySelectorAll(".feed-post-card__duration")].map((e)=>{ //LAMBDA CALCULUS TIME
+        const str=e.innerText
+        const h = str.match(/(\d+)h/)?.[1] || 0;
+        const m = str.match(/(\d+)m/)?.[1] || 0;
+        const s = str.match(/(\d+)s/)?.[1] || 0;
 
+        return (h * 3600) + (m * 60) + Number(s);
+    }).reduce((a,b)=>a+b,0)
+}
 function waitForElement(selector) {
     return new Promise((resolve)=>{
         const element=document.querySelector(selector)
@@ -117,8 +126,10 @@ async function main(){
     `
     repowrapper.querySelector("iframe").src=(await redirect(repolink)).replace("https://github.com/","https://pages.tanjim.org/github.com/#/")
     demowrapper.querySelector("iframe").src=(await redirect(demolink)).replace("https://github.com/","https://pages.tanjim.org/github.com/#/")
-    await fetch(repolink,{mode:"no-cors"})
-    await fetch(demolink,{mode:"no-cors"})
+    try{
+        await fetch(repolink,{mode:"no-cors"})
+        await fetch(demolink,{mode:"no-cors"})
+    }catch(e){console.log("[starship]",e)}
 }
 async function hateOnAI(){
     observer.disconnect();
